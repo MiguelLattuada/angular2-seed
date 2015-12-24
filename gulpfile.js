@@ -6,10 +6,22 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream');
 
 // Task: copy html files
-gulp.task('copy', function(){
+gulp.task('copy:html', function(){
     gulp.src('app/**/*.html')
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'));  
 });
+
+// Task: copy assets files
+gulp.task('copy:assets', function(){
+    gulp.src('app/assets/**/*.*')
+        .pipe(gulp.dest('dist/assets'));   
+});
+
+// Task: copy files
+gulp.task('copy', [
+    'copy:html',
+    'copy:assets'
+]);
 
 // Task: compile typscript files
 var tsp = tsc.createProject('tsconfig.json');
