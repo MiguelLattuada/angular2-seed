@@ -39,9 +39,21 @@ gulp.task('compile:browserify', ['compile:typescript'], function() {
         .pipe(gulp.dest('dist'));
 });
 
-// Task: create dist folder for prod/standalone
+// Task: create distribution /dist folder
 gulp.task('build', [
     'copy',
     'compile:typescript',
     'compile:browserify'
 ]);
+
+// Task: connect to web server
+gulp.task('serve', ['build'], function(){
+    connect.server({
+        root: 'dist',
+        livereload: false,
+        open: {
+            browser: 'chrome'
+        },
+        port: 5001
+    })
+});
